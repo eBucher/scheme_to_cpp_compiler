@@ -598,10 +598,13 @@ int SyntacticalAnalyzer::action(){
 	errors += runNonterminal("stmt_list");
 	break;
     case 42:
+	cg->writeCode("cout << ");
 	token = NextToken();
 	errors += runNonterminal("stmt");
+	cg->writeCode(";\n");
 	break;
     case 43:
+	cg->writeCode("cout << endl;\n");
 	token = lex ->GetToken();
 	break;
     }
@@ -643,6 +646,7 @@ int SyntacticalAnalyzer::any_other_token(){
 	errors += runNonterminal("more_tokens");
 	token = NextToken();	//Get one additional lexeme
     } else if (rule >= 45 && rule <= 72) {
+	cg->writeCode("\"" + lex->GetLexeme() + "\"");
 	token = NextToken();	//Get one additional lexeme
     }
     ending(nonTerminal, token, errors);
