@@ -178,6 +178,9 @@ int SyntacticalAnalyzer::define(){
 	token = NextToken();
 	expected_vector.push_back(IDENT_T);
 	errors += enforce(token, expected_vector);
+	//P3
+	cg->startFunction(lex->GetLexeme());
+	
 	if(token == EOF_T) {
             ending(nonTerminal, token, errors);	
 	    return errors;
@@ -189,12 +192,13 @@ int SyntacticalAnalyzer::define(){
 
 	expected_vector.push_back(RPAREN_T);
 	errors += enforce(token, expected_vector);
+
 	if(token == EOF_T) {
             ending(nonTerminal, token, errors);	
 	    return errors;
 	}
 	expected_vector.clear();
-	  
+	cg->writeCode(" ) {\n");
 	token = NextToken();
 	errors += runNonterminal("stmt");
 
@@ -202,6 +206,7 @@ int SyntacticalAnalyzer::define(){
 
 	expected_vector.push_back(RPAREN_T);
 	errors += enforce(token, expected_vector);
+	cg->writeCode("}\n\n");
 	if(token == EOF_T) {
             ending(nonTerminal, token, errors);	
 	    return errors;
@@ -476,10 +481,13 @@ int SyntacticalAnalyzer::param_list(){
 	rule = GetRule(8, token);
     }
     if (rule == 15) {
-	token = NextToken();
+	//P3
+	cg->addParam(lex->GetLexeme());
+    	token = NextToken();
 	errors += runNonterminal("param_list");
 
     } else if (rule == 16) {
+		cg->outputParams();
 	//Do nothing for lambda.
     }
     ending(nonTerminal, token, errors);

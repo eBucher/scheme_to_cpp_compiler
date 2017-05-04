@@ -7,8 +7,13 @@ class CodeGenerator {
 	public:
 	 CodeGenerator(char*);
 	 ~CodeGenerator();
-	 void startFunction(string);
 	 void startFile();
+	 void startFunction(string);
+	 void addParam(string);
+	 void outputParams();
+	 void writeCode(string);
 	private:
 	 ofstream p3file;
+	 string param_list;
+	 bool main_func;
 };
