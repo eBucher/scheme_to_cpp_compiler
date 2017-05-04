@@ -11,6 +11,7 @@
 #include <iostream>
 #include <fstream>
 #include "LexicalAnalyzer.h"
+#include "CodeGenerator.h"
 #include <vector>
 
 using namespace std;
@@ -44,6 +45,9 @@ class SyntacticalAnalyzer
 	int runNonterminal(string n);
 	token_type NextToken();
 	string lstOutput;
+	
+	//Project 3
+	CodeGenerator * cg;
 };
 	
 #endif

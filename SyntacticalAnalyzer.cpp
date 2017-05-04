@@ -45,11 +45,12 @@ SyntacticalAnalyzer::SyntacticalAnalyzer (char * filename)
 {
     /********************************************************************************/
        /* This function is the default constructor of the Syntactical Analyzer
-       /* It will create the output files <testing>.lst, <testing>.p2 
-       /* Then it sets our global private member token to the token that starts the
-       /* program. This should be a LPAREN_T. It then calls program. 
-    /********************************************************************************/
+       * It will create the output files <testing>.lst, <testing>.p2 
+       * Then it sets our global private member token to the token that starts the
+       * program. This should be a LPAREN_T. It then calls program. 
+    ********************************************************************************/
     lex = new LexicalAnalyzer (filename);
+    cg = new CodeGenerator (filename);
     int fnlength = strlen (filename);
     filename[fnlength-2] = 'p';
     filename[fnlength-1] = '2';
@@ -81,6 +82,7 @@ SyntacticalAnalyzer::~SyntacticalAnalyzer ()
     lstfile.close();
     cout << "Lexical errors: ";
     delete lex;
+    delete cg;
 }
 
 /**

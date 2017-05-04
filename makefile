@@ -1,11 +1,20 @@
+P3.out : Project3.o SetLimits.o LexicalAnalyzer.o SyntacticalAnalyzer.o CodeGenerator.o
+	g++ -g -o P3.out Project3.o SetLimits.o LexicalAnalyzer.o SyntacticalAnalyzer.o CodeGenerator.o
+
 P2.out : Project2.o SetLimits.o LexicalAnalyzer.o SyntacticalAnalyzer.o 
 	g++ -g -o P2.out Project2.o SetLimits.o LexicalAnalyzer.o SyntacticalAnalyzer.o 
+
+Project3.o : Project3.cpp SetLimits.h CodeGenerator.h
+	g++ -g -c Project3.cpp
 
 Project2.o : Project2.cpp SetLimits.h SyntacticalAnalyzer.h
 	g++ -g -c Project2.cpp
 
 SetLimits.o : SetLimits.cpp SetLimits.h
 	g++ -g -c SetLimits.cpp
+
+CodeGenerator.o : CodeGenerator.cpp CodeGenerator.h SyntacticalAnalyzer.h
+	g++ -g -c CodeGenerator.cpp
 
 LexicalAnalyzer.o : LexicalAnalyzer.save
 	cp LexicalAnalyzer.save LexicalAnalyzer.o
@@ -15,7 +24,7 @@ SyntacticalAnalyzer.o : SyntacticalAnalyzer.cpp SyntacticalAnalyzer.h LexicalAna
 
 
 clean : 
-	rm -f *.o P2.out *.gch *.lst *.dbg *.p2
+	rm -f *.o *.out *.gch *.lst *.dbg *.p2 *.p1 *.p3 test.c
 
 submit : Project2.cpp LexicalAnalyzer.h LexicalAnalyzer.save SyntacticalAnalyzer.h SyntacticalAnalyzer.cpp RuleMonitor.cpp RuleMonitor.h makefile README.txt
 	rm -rf TeamNP2
