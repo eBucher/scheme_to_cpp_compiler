@@ -1,12 +1,33 @@
+# HOW TO ADD A NEW TEST:
+# Add the .ss file to this folder and name it TeamLXP3.ss where X is the test number.
+# Create a .cpp file named expectedX.cpp where X is the same test number. This is the file
+# that the .cpp file produced by our program should match.
+
 #Change the prefixes and suffixes to everything around the test number in the text files.
 #Files should be named in the form of <prefix><test number><suffix>
 outputPrefix=TeamL
 outputSuffix=P3.cpp
 expectedPrefix=expected
 expectedSuffix=.cpp
+sourcePrefix=TeamL
+sourceSuffix=P3.ss
 
-#Change the name to be the folder to be where all of the test files are located.
-testFileFolders=tests
+sourceFiles=($(ls $sourcePrefix*$sourceSuffix))
+numFiles=${#sourceFiles[@]}
+
+#Get the P3 program
+cp ../P3.out .
+
+#Use the program on all of the sources
+END=$((${numFiles}-1))
+for i in $(seq 0 $END)
+do
+	./P3.out ${sourceFiles[i]} >> tempBashGarbage.txt
+done
+
+#Delete any of the extra stuff that the syntactical analyzer makes
+#This line can be modified to keep stuff if needed.
+rm -f *.o *.out *.lst *.dbg *.p1 *.p2 *.p3
 
 #Change this if you want to change the file that the results are printed to.
 resultsFile=testResults.txt
@@ -16,14 +37,12 @@ outputFiles=($(ls $outputPrefix*$outputSuffix))
 expectedFiles=($(ls $expectedPrefix*$expectedSuffix))
 
 #Remove the old results file
-rm $resultsFile
+rm -f $resultsFile
 
 echo "Beginning " ${#outputFiles[@]} " tests..."
 echo "Errors will be printed to" $resultsFile
 echo ""
 
-numFiles=${#outputFiles[@]}
-END=$((${numFiles}-1))
 for i in $(seq 0 $END)
 do
 
