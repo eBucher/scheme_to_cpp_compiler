@@ -1,7 +1,7 @@
 #Change the prefixes and suffixes to everything around the test number in the text files.
 #Files should be named in the form of <prefix><test number><suffix>
-outputPrefix=output
-outputSuffix=.cpp
+outputPrefix=TeamL
+outputSuffix=P3.cpp
 expectedPrefix=expected
 expectedSuffix=.cpp
 
