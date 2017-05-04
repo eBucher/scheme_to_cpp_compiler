@@ -11,7 +11,7 @@
 #include <iostream>
 #include <fstream>
 #include "LexicalAnalyzer.h"
-#include "RuleMonitor.h"
+#include <vector>
 
 using namespace std;
 

@@ -15,7 +15,7 @@ SyntacticalAnalyzer.o : SyntacticalAnalyzer.cpp SyntacticalAnalyzer.h LexicalAna
 
 
 clean : 
-	rm *.o P2.out *.gch *.lst *.dbg *.p2
+	rm -f *.o P2.out *.gch *.lst *.dbg *.p2
 
 submit : Project2.cpp LexicalAnalyzer.h LexicalAnalyzer.save SyntacticalAnalyzer.h SyntacticalAnalyzer.cpp RuleMonitor.cpp RuleMonitor.h makefile README.txt
 	rm -rf TeamNP2
