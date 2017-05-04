@@ -1,0 +1,57 @@
+#Change the prefixes and suffixes to everything around the test number in the text files.
+#Files should be named in the form of <prefix><test number><suffix>
+outputPrefix=output
+outputSuffix=.cpp
+expectedPrefix=expected
+expectedSuffix=.cpp
+
+#Change the name to be the folder to be where all of the test files are located.
+testFileFolders=tests
+
+#Change this if you want to change the file that the results are printed to.
+resultsFile=testResults.txt
+
+#Read all of the test files into arrays
+outputFiles=($(ls $outputPrefix*$outputSuffix))
+expectedFiles=($(ls $expectedPrefix*$expectedSuffix))
+
+#Remove the old results file
+rm $resultsFile
+
+echo "Beginning " ${#outputFiles[@]} " tests..."
+echo "Errors will be printed to" $resultsFile
+echo ""
+
+numFiles=${#outputFiles[@]}
+END=$((${numFiles}-1))
+for i in $(seq 0 $END)
+do
+
+	testNum=$(echo -n ${outputFiles[i]} | sed -e "s/${outputPrefix}\(.*\)${outputSuffix}/\1/")
+
+	diff -q ${outputFiles[i]} ${expectedFiles[i]} > tempBashGarbage.txt
+	if [ $? = 0 ]; then	#Checks the error code produced by the diff command.
+		echo "Test" $testNum "- PASSED"
+	else
+		echo "Test" $testNum "- FAILED"
+		echo "------Differences for Test" ${testNum} "------" >> $resultsFile
+		echo "Lines preceded by < are from " ${outputFiles[i]} >> $resultsFile
+		echo "Lines preceded by > are from " ${expectedFiles[i]} >> $resultsFile
+		echo "" >> $resultsFile
+
+		diff ${outputFiles[i]} ${expectedFiles[i]} >> $resultsFile
+
+		echo "------End of differences for Test " ${testNum} "------">> $resultsFile
+		echo "" >> $resultsFile
+		echo "" >> $resultsFile
+		echo "" >> $resultsFile
+		echo "" >> $resultsFile
+		echo "" >> $resultsFile
+		
+	fi
+done
+
+echo ""
+echo "Finished running tests."
+
+rm tempBashGarbage.txt
