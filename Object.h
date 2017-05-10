@@ -1,3 +1,8 @@
+// Project: CS 460 Spring 2017 Project 3
+// File: Object.h
+// Author: Dr. Watts
+// Desciption: Object class for Scheme to C++ translation
+
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -29,12 +34,7 @@ class Object
 	friend bool nullp (const Object & O);
 	friend bool charp (const Object & O);
 	friend bool stringp (const Object & O);
-	friend Object car (const Object & O);
-	friend Object cdr (const Object & O);
-	friend Object cadr (const Object & O);
-	friend Object cddr (const Object & O);
-	friend Object caddr (const Object & O);
-	friend Object cdddr (const Object & O);
+	friend Object listop (const string & S, const Object & O);
 	friend Object cons (const Object & O1, const Object O2);
 	friend ostream & operator << (ostream & outs, const Object & O);
     private:
