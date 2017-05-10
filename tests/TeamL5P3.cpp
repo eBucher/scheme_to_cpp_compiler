@@ -4,6 +4,6 @@
 using namespace std;
 
 int main(  ) {
-cout << ! Object("1 ");
+cout << Object("define ");
 return 0;
 }

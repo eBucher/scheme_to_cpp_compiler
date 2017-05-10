@@ -411,8 +411,9 @@ int SyntacticalAnalyzer::quoted_lit() {
 		rule = GetRule(6, token);
 	}
 	if (rule == 12) {
+		cg->writeCode("Object(\"");
 		errors += runNonterminal("any_other_token");
-
+		cg->writeCode("\")");
 	}
 
 	ending("quoted_lit", token, errors);
@@ -713,11 +714,13 @@ int SyntacticalAnalyzer::any_other_token(){
 		rule = GetRule(11, token);
 	}
 	if (rule == 44) {
+		cg->writeCode("(");
 		token = NextToken();
 		errors += runNonterminal("more_tokens");
+		cg->writeCode(")");
 		token = NextToken();	//Get one additional lexeme
 	} else if (rule >= 45 && rule <= 72) {
-		cg->writeObject("\"" + lex->GetLexeme() + "\"");
+		cg->writeCode(lex->GetLexeme() + " ");
 		token = NextToken();	//Get one additional lexeme
 	}
 	ending(nonTerminal, token, errors);

@@ -4,6 +4,6 @@
 using namespace std;
 
 int main(  ) {
-cout << ! Object("1 ");
+cout << Object("(123 abc not )");
 return 0;
 }
