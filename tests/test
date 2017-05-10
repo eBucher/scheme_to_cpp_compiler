@@ -15,6 +15,11 @@ sourceSuffix=P3.ss
 sourceFiles=($(ls $sourcePrefix*$sourceSuffix))
 numFiles=${#sourceFiles[@]}
 
+#Colors for printing out text
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NO_COLOR='\033[0m'
+
 #Get the P3 program
 cp ../P3.out .
 
@@ -50,9 +55,9 @@ do
 
 	diff -EZBbwq ${outputFiles[i]} ${expectedFiles[i]} > tempBashGarbage.txt
 	if [ $? = 0 ]; then	#Checks the error code produced by the diff command.
-		echo "Test" $testNum "- PASSED"
+		echo -e "Test" $testNum "- ${GREEN}PASSED${NO_COLOR}"
 	else
-		echo "Test" $testNum "- FAILED"
+		echo -e "Test" $testNum "- ${RED}FAILED${NO_COLOR}"
 		echo "------Differences for Test" ${testNum} "------" >> $resultsFile
 		echo "Lines preceded by < are from " ${outputFiles[i]} >> $resultsFile
 		echo "Lines preceded by > are from " ${expectedFiles[i]} >> $resultsFile
