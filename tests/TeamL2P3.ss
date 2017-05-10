@@ -1,3 +1,5 @@
+; Tests number?, symbol?, list?, zero?, null?,
+; char?, and string?
 (define (main)
 	(display (number? 1))
 	(display (symbol? l))

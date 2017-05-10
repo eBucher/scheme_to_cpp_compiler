@@ -51,13 +51,16 @@ echo ""
 for i in $(seq 0 $END)
 do
 
+	#Get the test number from the output file name.
 	testNum=$(echo -n ${outputFiles[i]} | sed -e "s/${outputPrefix}\(.*\)${outputSuffix}/\1/")
 
 	diff -EZBbwq ${outputFiles[i]} ${expectedFiles[i]} > tempBashGarbage.txt
 	if [ $? = 0 ]; then	#Checks the error code produced by the diff command.
-		echo -e "Test" $testNum "- ${GREEN}PASSED${NO_COLOR}"
+		STATUS_COLOR=${GREEN}
+		STATUS_TEXT="PASSED"
 	else
-		echo -e "Test" $testNum "- ${RED}FAILED${NO_COLOR}"
+		STATUS_COLOR=${RED}
+		STATUS_TEXT="FAILED"
 		echo "------Differences for Test" ${testNum} "------" >> $resultsFile
 		echo "Lines preceded by < are from " ${outputFiles[i]} >> $resultsFile
 		echo "Lines preceded by > are from " ${expectedFiles[i]} >> $resultsFile
@@ -71,8 +74,26 @@ do
 		echo "" >> $resultsFile
 		echo "" >> $resultsFile
 		echo "" >> $resultsFile
-		
 	fi
+
+	#Get the description text from the source file
+	OLD_IFS=$IFS	#IFS is what determines how to split the results from grep into an array.
+	IFS=$'\n'
+	testDescriptionLines=($(grep '^;' ${sourceFiles[i]} | cut -c 2-))
+	numDescriptionLines=${#testDescriptionLines[@]}
+	DESCRIPTION_END=$((${numDescriptionLines}-1))
+	IFS=$OLD_IFS
+
+	printf "${STATUS_COLOR}[===============]${NO_COLOR}\n"
+	printf "${STATUS_COLOR}[     Test ${testNum}\t] ${NO_COLOR}${testDescriptionLines[0]}\n"
+	printf "${STATUS_COLOR}[     ${STATUS_TEXT}\t] ${NO_COLOR}${testDescriptionLines[1]}\n"
+	
+	for j in $(seq 2 $DESCRIPTION_END)
+	do
+		printf "${STATUS_COLOR}[\t\t] ${NO_COLOR}${testDescriptionLines[j]}\n"
+	done
+
+	printf "${STATUS_COLOR}[===============]${NO_COLOR}\n\n"
 done
 
 echo ""
