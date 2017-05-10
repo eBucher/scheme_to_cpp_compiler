@@ -13,6 +13,7 @@ class CodeGenerator {
 	 void addParam(string);
 	 void outputParams();
 	 void writeCode(string);
+	 void writeObject(string);
 	private:
 	 ofstream p3file;
 	 string param_list;

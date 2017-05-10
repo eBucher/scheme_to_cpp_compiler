@@ -4,7 +4,6 @@
 using namespace std;
 
 int main(  ) {
-cout << Object("Hello_World");
-cout << endl;
+cout << ! Object("1");
 return 0;
 }

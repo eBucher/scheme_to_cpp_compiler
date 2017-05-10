@@ -54,3 +54,7 @@ void CodeGenerator::outputParams(  ){
 void CodeGenerator::writeCode( string code ) {
 	p3file << code;
 }
+
+void CodeGenerator::writeObject(string objectName) {
+	p3file << "Object(" << objectName << ")";
+}

@@ -319,7 +319,7 @@ int SyntacticalAnalyzer::stmt(){
 		errors += runNonterminal("literal");	
 	} else if (rule == 8){
 		//P3
-		cg->writeCode(lex->GetLexeme());
+		cg->writeObject(lex->GetLexeme());
 		token = NextToken();	//Get one additional token
 	} else if (rule == 9){
 		token = NextToken();
@@ -368,7 +368,7 @@ int SyntacticalAnalyzer::literal(){
 		rule = GetRule(5,token);
 	}
 	if (rule == 10) {
-		cg->writeCode(lex->GetLexeme());
+		cg->writeObject(lex->GetLexeme());
 		token = NextToken();	//Get one additional token
 	} else if (rule == 11) {
 		token = NextToken();
@@ -585,55 +585,55 @@ int SyntacticalAnalyzer::action(){
 			errors += runNonterminal("stmt_list");
 			break;
 		case 24:
+			cg->writeCode("! ");
 			token = NextToken();
 			errors += runNonterminal("stmt");
 			break;
 		case 25:
 			token = NextToken();
-			cg->writeCode("numberp( Object(");
+			cg->writeCode("numberp(");
 			errors += runNonterminal("stmt");
-			cg->writeCode(") )");
+			cg->writeCode(" )");
 			break;
 		case 26:
 			token = NextToken();
-			cg->writeCode("symbolp( Object(");
+			cg->writeCode("symbolp(");
 			errors += runNonterminal("stmt");
-			cg->writeCode(") )");
+			cg->writeCode(" )");
 			break;
 		case 27:
 			token = NextToken();
-			cg->writeCode("listp( Object(");
+			cg->writeCode("listp(");
 			errors += runNonterminal("stmt");
-			cg->writeCode(") )");
+			cg->writeCode(" )");
 			break;
 		case 28:
 			token = NextToken();
-			cg->writeCode("zerop( Object(");
+			cg->writeCode("zerop(");
 			errors += runNonterminal("stmt");
-			cg->writeCode(") )");
+			cg->writeCode(" )");
 			break;
 		case 29:
 			token = NextToken();
-			cg->writeCode("nullp( Object(");
+			cg->writeCode("nullp(");
 			errors += runNonterminal("stmt");
-			cg->writeCode(") )");
+			cg->writeCode(" )");
 			break;
 		case 30:
 			token = NextToken();
-			cg->writeCode("charp( Object(");
+			cg->writeCode("charp(");
 			errors += runNonterminal("stmt");
-			cg->writeCode(") )");
+			cg->writeCode(" )");
 			break;
 		case 31:
 			token = NextToken();
-			cg->writeCode("stringp( Object(");
+			cg->writeCode("stringp(");
 			errors += runNonterminal("stmt");
-			cg->writeCode(") )");
+			cg->writeCode(" )");
 			break;
 		case 32:
 			token = NextToken();
 			errors += runNonterminal("stmt_list");
-			cg->writeCode(") )");
 			break;
 		case 33 ... 34:
 			token = NextToken();
@@ -717,7 +717,7 @@ int SyntacticalAnalyzer::any_other_token(){
 		errors += runNonterminal("more_tokens");
 		token = NextToken();	//Get one additional lexeme
 	} else if (rule >= 45 && rule <= 72) {
-		cg->writeCode("\"" + lex->GetLexeme() + "\"");
+		cg->writeObject("\"" + lex->GetLexeme() + "\"");
 		token = NextToken();	//Get one additional lexeme
 	}
 	ending(nonTerminal, token, errors);
