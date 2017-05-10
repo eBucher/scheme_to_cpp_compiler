@@ -1,9 +1,8 @@
 #include <iostream>
 #include "Object.h"
-
 using namespace std;
 
-int main(  ) {
-return 0;
+int main(){
+	cout << numberp(Object(1));
+	return 0;
 }
-

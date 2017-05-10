@@ -1,0 +1,17 @@
+------Differences for Test 2 ------
+Lines preceded by < are from  TeamL2P3.cpp
+Lines preceded by > are from  expected2.cpp
+
+8,13d7
+< cout << symbolp( Object(l) );
+< cout << listp( Object("a") );
+< cout << zerop( Object(0) );
+< cout << nullp( Object(9) );
+< cout << charp( Object(d) );
+< cout << stringp( Object("test") );
+------End of differences for Test  2 ------
+
+
+
+
+

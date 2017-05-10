@@ -48,7 +48,7 @@ do
 
 	testNum=$(echo -n ${outputFiles[i]} | sed -e "s/${outputPrefix}\(.*\)${outputSuffix}/\1/")
 
-	diff -q ${outputFiles[i]} ${expectedFiles[i]} > tempBashGarbage.txt
+	diff -EZBbwq ${outputFiles[i]} ${expectedFiles[i]} > tempBashGarbage.txt
 	if [ $? = 0 ]; then	#Checks the error code produced by the diff command.
 		echo "Test" $testNum "- PASSED"
 	else
@@ -58,7 +58,7 @@ do
 		echo "Lines preceded by > are from " ${expectedFiles[i]} >> $resultsFile
 		echo "" >> $resultsFile
 
-		diff ${outputFiles[i]} ${expectedFiles[i]} >> $resultsFile
+		diff -EZbBw ${outputFiles[i]} ${expectedFiles[i]} >> $resultsFile
 
 		echo "------End of differences for Test " ${testNum} "------">> $resultsFile
 		echo "" >> $resultsFile

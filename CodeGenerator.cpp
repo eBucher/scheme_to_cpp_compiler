@@ -7,6 +7,7 @@
 using namespace std;
 
 CodeGenerator::CodeGenerator( char* filename ){
+	main_func = false;
 	int fnlength = strlen(filename);
 	string outfile(filename);
 	outfile[outfile.size()-2] = 'c';
@@ -30,8 +31,15 @@ void CodeGenerator::startFunction( string function_name ){
 		p3file << "int main( ";
 		main_func = true;
 	} else {
+		main_func = false;
 		p3file << "Object " << function_name << "( ";
 	}
+}
+
+void CodeGenerator::endFunction(){
+	if ( main_func )
+		p3file << "return 0;\n}";
+	else p3file << "return _RetVal;\n}";
 }
 
 void CodeGenerator::addParam( string param ){

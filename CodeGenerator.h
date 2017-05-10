@@ -9,6 +9,7 @@ class CodeGenerator {
 	 ~CodeGenerator();
 	 void startFile();
 	 void startFunction(string);
+	 void endFunction();
 	 void addParam(string);
 	 void outputParams();
 	 void writeCode(string);
