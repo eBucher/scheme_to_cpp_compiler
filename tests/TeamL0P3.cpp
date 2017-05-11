@@ -4,5 +4,6 @@
 using namespace std;
 
 int main(  ) {
+Object _RetVal;
 return 0;
 }

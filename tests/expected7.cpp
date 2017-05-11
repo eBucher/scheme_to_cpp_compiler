@@ -3,6 +3,7 @@
 using namespace std;
 
 int main(){
+	Object _RetVal;
 	cout << listop("car", Object("(alpha beta gamma delta)"));
 	cout << endl;
 	cout << listop("cdr", Object("(the time has come the walrus said)"));
