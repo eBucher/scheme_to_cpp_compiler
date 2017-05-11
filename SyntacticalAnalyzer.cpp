@@ -573,15 +573,24 @@ int SyntacticalAnalyzer::action(){
 			errors += runNonterminal("else_part");
 			break;
 		case 20:
+			cg->writeCode("listop(\"" + lex->GetLexeme() + "\", ");
 			token = NextToken();
 			errors += runNonterminal("stmt");
+			cg->writeCode(")");
 			break;
 		case 21:
 			token = NextToken();
+			cg->writeCode("cons(");
 			errors += runNonterminal("stmt");
+			cg->writeCode(", ");
 			errors += runNonterminal("stmt");
+			cg->writeCode(")");
 			break;
-		case 22 ... 23:
+		case 22:
+			token = NextToken();
+			errors += runNonterminal("stmt_list");
+			break;
+		case 23:
 			token = NextToken();
 			errors += runNonterminal("stmt_list");
 			break;
