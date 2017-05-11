@@ -198,7 +198,9 @@ int SyntacticalAnalyzer::define(){
 			return errors;
 		}
 		expected_vector.clear();
-		cg->writeCode(" ) {\n");
+		//P3
+		cg->writeCode(" ) {\nObject _RetVal;\n");
+
 		token = NextToken();
 		errors += runNonterminal("stmt");
 
@@ -568,8 +570,11 @@ int SyntacticalAnalyzer::action(){
 	switch (rule) {
 		case 19:
 			token = NextToken();
+			cg->writeCode("if(");
 			errors += runNonterminal("stmt");
+			cg->writeCode("){\n");
 			errors += runNonterminal("stmt");
+			cg->writeCode("\n} ");
 			errors += runNonterminal("else_part");
 			break;
 		case 20:
