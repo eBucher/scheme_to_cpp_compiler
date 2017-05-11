@@ -526,11 +526,14 @@ int SyntacticalAnalyzer::else_part(){
 
 		rule = GetRule(9,token);
 	}
+	
 	if (rule == 17) {
+		cg->writeCode("else {\n");
 		errors += runNonterminal("stmt");
+		cg->writeCode("}\n");
 
 	} else if (rule == 18) {
-		//Do nothing for lambda.
+		cg->writeCode("else {\n}");
 	}
 	ending("else_part", token, errors);
 	return errors;
