@@ -39,7 +39,7 @@ void CodeGenerator::startFunction( string function_name ){
 void CodeGenerator::endFunction(){
 	if ( main_func )
 		p3file << "return 0;\n}";
-	else p3file << "return _RetVal;\n}";
+	else p3file << "return _RetVal;\n}\n";
 }
 
 void CodeGenerator::addParam( string param ){
