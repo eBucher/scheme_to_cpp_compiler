@@ -202,8 +202,8 @@ int SyntacticalAnalyzer::define(){
 		cg->writeCode(" ) {\nObject _RetVal;\n");
 
 		token = NextToken();
+		cg->addToStack(' ');
 		errors += runNonterminal("stmt");
-
 		errors += runNonterminal("stmt_list");
 
 		expected_vector.push_back(RPAREN_T);
@@ -283,9 +283,11 @@ int SyntacticalAnalyzer::stmt_list(){
 		rule = GetRule(3,token);
 	}
 	if(rule == 5){
+		cg->writeOperator();
 		errors += runNonterminal("stmt");
 		errors += runNonterminal("stmt_list");
 	} else if (rule == 6){
+		cg->popFromStack();
 		//Do nothing for lambda.
 	}
 	ending(nonTerminal, token, errors);
@@ -650,8 +652,11 @@ int SyntacticalAnalyzer::action(){
 			cg->writeCode(" )");
 			break;
 		case 32:
+			cg->writeCode("(");
+			cg->addToStack('+');
 			token = NextToken();
 			errors += runNonterminal("stmt_list");
+			cg->writeCode(")");
 			break;
 		case 33 ... 34:
 			token = NextToken();

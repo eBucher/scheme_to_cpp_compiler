@@ -1,3 +1,5 @@
+; Tests if statements and else statements
+
 (define (main)
 	(if (number? 4)
 		(display 'is_a_number)

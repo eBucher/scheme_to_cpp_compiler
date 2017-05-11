@@ -58,3 +58,19 @@ void CodeGenerator::writeCode( string code ) {
 void CodeGenerator::writeObject(string objectName) {
 	p3file << "Object(" << objectName << ")";
 }
+
+void CodeGenerator::writeOperator(){
+	if ( first_stmt == false )
+		p3file << operator_stack.top();
+	else first_stmt = false;
+}
+
+void CodeGenerator::addToStack(char c){
+	first_stmt = true;
+	operator_stack.push(c);
+}
+
+
+void CodeGenerator::popFromStack(){
+	operator_stack.pop();
+}
