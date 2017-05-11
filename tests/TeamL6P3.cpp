@@ -4,7 +4,7 @@
 using namespace std;
 
 int main(  ) {
-cout << Object("(its as easy as abc one two three )");
+cout << listop("car", Object("(its as easy as abc one two three )"));
 cout << endl;
 return 0;
 }
