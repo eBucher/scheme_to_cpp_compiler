@@ -535,7 +535,7 @@ int SyntacticalAnalyzer::else_part(){
 		cg->writeCode("}\n");
 
 	} else if (rule == 18) {
-		cg->writeCode("else {\n}");
+		cg->writeCode("else {\n}\n");
 	}
 	ending("else_part", token, errors);
 	return errors;
