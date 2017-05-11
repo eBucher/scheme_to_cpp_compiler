@@ -12,7 +12,7 @@ expectedSuffix=.cpp
 sourcePrefix=TeamL
 sourceSuffix=P3.ss
 
-sourceFiles=($(ls $sourcePrefix*$sourceSuffix))
+sourceFiles=($(ls $sourcePrefix*$sourceSuffix | sort -V))
 numFiles=${#sourceFiles[@]}
 
 #Colors for printing out text
@@ -38,8 +38,8 @@ rm -f *.o *.out *.lst *.dbg *.p1 *.p2 *.p3
 resultsFile=testResults.txt
 
 #Read all of the test files into arrays
-outputFiles=($(ls $outputPrefix*$outputSuffix))
-expectedFiles=($(ls $expectedPrefix*$expectedSuffix))
+outputFiles=($(ls $outputPrefix*$outputSuffix | sort -V))
+expectedFiles=($(ls $expectedPrefix*$expectedSuffix | sort -V))
 
 #Remove the old results file
 rm -f $resultsFile
