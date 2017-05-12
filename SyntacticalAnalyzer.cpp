@@ -658,14 +658,28 @@ int SyntacticalAnalyzer::action(){
 			errors += runNonterminal("stmt_list");
 			cg->writeCode(")");
 			break;
-		case 33 ... 34:
+		case 33:
+			token = NextToken();
+			errors += runNonterminal("stmt");
+			cg->writeCode("(");
+			cg->addToStack('-');
+			errors += runNonterminal("stmt_list");
+			cg->writeCode(")");
+			break;
+		case 34:
+			cg->writeCode("(");
+			cg->addToStack('/');
 			token = NextToken();
 			errors += runNonterminal("stmt");
 			errors += runNonterminal("stmt_list");
+			cg->writeCode(")");
 			break;
 		case 35:
+			cg->writeCode("(");
+			cg->addToStack('*');
 			token = NextToken();
 			errors += runNonterminal("stmt_list");
+			cg->writeCode(")");
 			break;
 		case 36:
 			token = NextToken();

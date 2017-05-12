@@ -60,9 +60,13 @@ void CodeGenerator::writeObject(string objectName) {
 }
 
 void CodeGenerator::writeOperator(){
-	if ( first_stmt == false )
-		p3file << operator_stack.top();
-	else first_stmt = false;
+	if ( first_stmt == false ){
+		if(!operator_stack.empty()){
+			p3file << operator_stack.top();
+		}
+	} else {
+		first_stmt = false;
+	}
 }
 
 void CodeGenerator::addToStack(char c){
