@@ -1,83 +1,11 @@
-------Differences for Test 11 ------
-Lines preceded by < are from  TeamL11P3.cpp
-Lines preceded by > are from  expected11.cpp
-
-8c7
-< cout << (Object(1)Object(2)Object(3)Object(4)Object(5));
----
-> 	cout << (Object(1) + Object(2) + Object(3) + Object(4) + Object(5));
-------End of differences for Test  11 ------
-
-
-
-
-
-------Differences for Test 12 ------
-Lines preceded by < are from  TeamL12P3.cpp
-Lines preceded by > are from  expected12.cpp
-
-8c7
-< cout << Object(1)(Object(2)Object(3)Object(4)Object(5));
----
-> 	cout << (Object(1) - Object(2) - Object(3) - Object(4) - Object(5));
-------End of differences for Test  12 ------
-
-
-
-
-
-------Differences for Test 13 ------
-Lines preceded by < are from  TeamL13P3.cpp
-Lines preceded by > are from  expected13.cpp
-
-8c7
-< cout << (Object(1)Object(2)Object(3)Object(4)Object(5));
----
-> 	cout << (Object(1) * Object(2) * Object(3) * Object(4) * Object(5));
-------End of differences for Test  13 ------
-
-
-
-
-
-------Differences for Test 14 ------
-Lines preceded by < are from  TeamL14P3.cpp
-Lines preceded by > are from  expected14.cpp
-
-8c7
-< cout << (Object(1)Object(2)Object(3)Object(4)Object(5));
----
-> 	cout << (Object(1) / Object(2) / Object(3) / Object(4) / Object(5));
-------End of differences for Test  14 ------
-
-
-
-
-
-------Differences for Test 15 ------
-Lines preceded by < are from  TeamL15P3.cpp
-Lines preceded by > are from  expected15.cpp
-
-8c7
-< cout << (Object(1)Object(2)(Object(3)Object(4))(Object(5)Object(6)Object(7)(Object(8)Object(9)))Object(10));
----
-> 	cout << (Object(1) + (Object(2) - Object(3) - Object(4)) + (Object(5) * Object(6) * Object(7) * (Object(8) / Object(9))) + Object(10));
-11a11
-> //(display (+ 1 (- 2 3 4) (* 5 6 7 (/ 8 9)) 10))
-------End of differences for Test  15 ------
-
-
-
-
-
 ------Differences for Test 16 ------
 Lines preceded by < are from  TeamL16P3.cpp
 Lines preceded by > are from  expected16.cpp
 
 7,10c6,7
 < Object _RetVal;
-< cout << Object("' ");
-< cout << Object("(' one ' two ' three )");
+< cout <<  Object("' ");
+<  cout <<  Object("(' one ' two ' three )");
 < return 0;
 ---
 > 	cout << Object("quote not");
