@@ -202,7 +202,7 @@ int SyntacticalAnalyzer::define(){
 		cg->writeCode(" ) {\nObject _RetVal;\n");
 
 		token = NextToken();
-		cg->addToStack(' ');
+		cg->addToStack(" ");
 		errors += runNonterminal("stmt");
 		errors += runNonterminal("stmt_list");
 
@@ -226,11 +226,11 @@ int SyntacticalAnalyzer::define(){
  *  called when non-terminating more_defines() is reached
  **/
 int SyntacticalAnalyzer::more_defines(){
-	/********************************************************************                                                                                               
-	/* This funciton will take in a token,
-	/* find a rule number for it, and proceed with the rule it recieves
-	/* If the rule is -1, we will cycle through the tokens until we get a
-	/* token we want, incrementing the errors until then
+	/********************************************************************                                                                          
+	* This funciton will take in a token,
+	* find a rule number for it, and proceed with the rule it recieves
+	* If the rule is -1, we will cycle through the tokens until we get a
+	* token we want, incrementing the errors until then
 	 *********************************************************************/
 	int rule = GetRule(2, token);
 	int errors = 0;
@@ -283,7 +283,6 @@ int SyntacticalAnalyzer::stmt_list(){
 		rule = GetRule(3,token);
 	}
 	if(rule == 5){
-		cg->writeOperator();
 		errors += runNonterminal("stmt");
 		errors += runNonterminal("stmt_list");
 	} else if (rule == 6){
@@ -319,16 +318,33 @@ int SyntacticalAnalyzer::stmt(){
 		}
 		rule = GetRule(4,token);
 	}
+	//P3
+	cg->writeOperator();
+	bool usedRetVal = false;
 	if (rule == 7){
+		if(cg->getRetVal()){
+			cg->writeCode("_RetVal = ");
+			usedRetVal = true;
+		}
+		cg->setRetVal(false);
 		errors += runNonterminal("literal");	
 	} else if (rule == 8){
 		//P3
+		if(cg->getRetVal()){
+			cg->writeCode("_RetVal = ");
+			usedRetVal = true;
+		}
+		cg->setRetVal(false);
 		cg->writeObject(lex->GetLexeme());
 		token = NextToken();	//Get one additional token
 	} else if (rule == 9){
 		token = NextToken();
+		if(cg->getRetVal() && token != DISPLAY_T && token != NEWLINE_T && token != IF_T){
+			cg->writeCode("_RetVal = ");
+			usedRetVal = true;
+		}
+		cg->setRetVal(false);
 		errors += runNonterminal("action");
-
 		vector<int>expected_vector;
 		expected_vector.push_back(RPAREN_T);
 		errors += enforce(token, expected_vector);
@@ -341,6 +357,12 @@ int SyntacticalAnalyzer::stmt(){
 		token = NextToken();	//Get one additional token
 	}
 	ending(nonTerminal, token, errors);
+
+	if(usedRetVal){
+		cg->writeCode(";\n");
+		cg->setRetVal(true);
+	}
+
 	return errors;
 }
 
@@ -581,6 +603,7 @@ int SyntacticalAnalyzer::action(){
 			errors += runNonterminal("stmt");
 			cg->writeCode("\n} ");
 			errors += runNonterminal("else_part");
+			cg->setRetVal(true);
 			break;
 		case 20:
 			cg->writeCode("listop(\"" + lex->GetLexeme() + "\", ");
@@ -597,12 +620,18 @@ int SyntacticalAnalyzer::action(){
 			cg->writeCode(")");
 			break;
 		case 22:
+		        cg->writeCode("(");
+			cg->addToStack("&&");
 			token = NextToken();
 			errors += runNonterminal("stmt_list");
+			cg->writeCode(")");
 			break;
 		case 23:
+		        cg->writeCode("(");
+			cg->addToStack("||");
 			token = NextToken();
 			errors += runNonterminal("stmt_list");
+			cg->writeCode(")");
 			break;
 		case 24:
 			cg->writeCode("! ");
@@ -653,22 +682,22 @@ int SyntacticalAnalyzer::action(){
 			break;
 		case 32:
 			cg->writeCode("(");
-			cg->addToStack('+');
+			cg->addToStack("+");
 			token = NextToken();
 			errors += runNonterminal("stmt_list");
 			cg->writeCode(")");
 			break;
 		case 33:
+			cg->writeCode("(");
+			cg->addToStack("-");
 			token = NextToken();
 			errors += runNonterminal("stmt");
-			cg->writeCode("(");
-			cg->addToStack('-');
 			errors += runNonterminal("stmt_list");
 			cg->writeCode(")");
 			break;
 		case 34:
 			cg->writeCode("(");
-			cg->addToStack('/');
+			cg->addToStack("/");
 			token = NextToken();
 			errors += runNonterminal("stmt");
 			errors += runNonterminal("stmt_list");
@@ -676,12 +705,14 @@ int SyntacticalAnalyzer::action(){
 			break;
 		case 35:
 			cg->writeCode("(");
-			cg->addToStack('*');
+			cg->addToStack("*");
 			token = NextToken();
 			errors += runNonterminal("stmt_list");
 			cg->writeCode(")");
 			break;
 		case 36:
+			cg->writeCode("(");
+			//cg->addToStack();
 			token = NextToken();
 			errors += runNonterminal("stmt_list");
 			break;
@@ -702,18 +733,23 @@ int SyntacticalAnalyzer::action(){
 			errors += runNonterminal("stmt_list");
 			break;
 		case 41:
+			cg->writeCode(lex->GetLexeme() + "(");
+			cg->addToStack(",");
 			token = NextToken();
 			errors += runNonterminal("stmt_list");
+			cg->writeCode(")");
 			break;
 		case 42:
 			cg->writeCode("cout << ");
 			token = NextToken();
 			errors += runNonterminal("stmt");
 			cg->writeCode(";\n");
+			cg->setRetVal(true);
 			break;
 		case 43:
 			cg->writeCode("cout << endl;\n");
 			token = lex ->GetToken();
+			cg->setRetVal(true);
 			break;
 	}
 

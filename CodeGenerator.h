@@ -17,12 +17,15 @@ class CodeGenerator {
 	 void writeCode(string);
 	 void writeObject(string);
 	 void writeOperator();
-	 void addToStack(char);
+	 void addToStack(string);
 	 void popFromStack();
+	 bool getRetVal();
+	 void setRetVal(bool);
 	private:
 	 ofstream p3file;
 	 string param_list;
 	 bool main_func;
 	 bool first_stmt;
-	 stack<char> operator_stack;	
+	 stack<string> operator_stack;	
+	 bool use_retVal;
 };

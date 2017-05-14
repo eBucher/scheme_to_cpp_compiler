@@ -26,7 +26,7 @@ SyntacticalAnalyzer.o : SyntacticalAnalyzer.cpp SyntacticalAnalyzer.h LexicalAna
 clean : 
 	rm -f *.o *.out *.gch *.lst *.dbg *.p2 *.p1 *.p3 test.c
 
-submit : Project2.cpp LexicalAnalyzer.h LexicalAnalyzer.save SyntacticalAnalyzer.h SyntacticalAnalyzer.cpp RuleMonitor.cpp RuleMonitor.h makefile README.txt
+submit : Project2.cpp LexicalAnalyzer.h LexicalAnalyzer.save SyntacticalAnalyzer.h SyntacticalAnalyzer.cpp CodeGenerator.cpp makefile README.txt
 	rm -rf TeamNP2
 	mkdir TeamNP2
 	cp Project2.cpp TeamNP2

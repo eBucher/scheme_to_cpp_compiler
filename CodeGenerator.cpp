@@ -15,6 +15,7 @@ CodeGenerator::CodeGenerator( char* filename ){
 	outfile += 'p';
 	p3file.open( outfile.c_str() );
 	startFile();
+	use_retVal = true;
 }
 
 CodeGenerator::~CodeGenerator(){
@@ -38,8 +39,8 @@ void CodeGenerator::startFunction( string function_name ){
 
 void CodeGenerator::endFunction(){
 	if ( main_func )
-		p3file << "return 0;\n}";
-	else p3file << "return _RetVal;\n}\n";
+		p3file << "\treturn 0;\n}";
+	else p3file << "\treturn _RetVal;\n}\n";
 }
 
 void CodeGenerator::addParam( string param ){
@@ -62,14 +63,15 @@ void CodeGenerator::writeObject(string objectName) {
 void CodeGenerator::writeOperator(){
 	if ( first_stmt == false ){
 		if(!operator_stack.empty()){
-			p3file << operator_stack.top();
+			if ( operator_stack.top() != " ")
+				p3file << operator_stack.top();
 		}
 	} else {
 		first_stmt = false;
 	}
 }
 
-void CodeGenerator::addToStack(char c){
+void CodeGenerator::addToStack(string c){
 	first_stmt = true;
 	operator_stack.push(c);
 }
@@ -77,4 +79,14 @@ void CodeGenerator::addToStack(char c){
 
 void CodeGenerator::popFromStack(){
 	operator_stack.pop();
+}
+
+
+bool CodeGenerator::getRetVal(){
+	return use_retVal;
+}
+
+
+void CodeGenerator::setRetVal(bool val){
+	use_retVal = val;
 }
