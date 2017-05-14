@@ -3,8 +3,8 @@
 
 using namespace std;
 
-int main(  ) {
-Object _RetVal;
-cout << Object("(123 abc not )");
+int main(){
+	Object _RetVal;
+	_RetVal = (Object(1) + Object(2));
 	return 0;
 }
