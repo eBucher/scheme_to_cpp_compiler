@@ -20,6 +20,9 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NO_COLOR='\033[0m'
 
+#Counts how many tests passed.
+correctCount=0
+
 #Get the P3 program
 cp ../P3.out .
 
@@ -58,6 +61,7 @@ do
 	if [ $? = 0 ]; then	#Checks the error code produced by the diff command.
 		STATUS_COLOR=${GREEN}
 		STATUS_TEXT="PASSED"
+		correctCount=$((${correctCount}+1))
 	else
 		STATUS_COLOR=${RED}
 		STATUS_TEXT="FAILED"
@@ -98,5 +102,23 @@ done
 
 echo ""
 echo "Finished running tests."
+
+if [ "$correctCount" = "$numFiles" ]
+then
+	printf "${GREEN}"
+	printf "      _\n"
+	printf "     /(|\n"
+	printf "    (  :\n"
+	printf "   __\  \  _____\n"
+	printf "  (____)  '|         All ${correctCount}/${numFiles} tests passed.\n"
+	printf " (____)|   |\n"
+	printf "  (____).__|\n"
+	printf "   (___)__.|_____\n"
+	printf "${NO_COLOR}"
+else
+	printf "${RED}"
+	printf "${correctCount}/${numFiles} tests passed.\n\n"
+	printf "${NO_COLOR}"
+fi
 
 rm tempBashGarbage.txt
