@@ -4,10 +4,10 @@ using namespace std;
 
 int main(){
 	Object _RetVal;
-	if (8 == 9){
-		cout << "EQUAL";
+	if ((Object(8) == Object(9))){
+		cout << Object("EQUAL");
 	} else {
-		cout << "NOT_EQUAL";
+		cout << Object("NOT_EQUAL");
 	}
 	return 0;
 }

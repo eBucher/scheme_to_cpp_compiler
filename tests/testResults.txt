@@ -16,24 +16,3 @@ Lines preceded by > are from  expected16.cpp
 
 
 
-------Differences for Test 17 ------
-Lines preceded by < are from  TeamL17P3.cpp
-Lines preceded by > are from  expected17.cpp
-
-8,10c7,8
-< if((Object(8)==Object(9)){
-< cout << Object("EQUAL ");
-< 
----
-> 	if (8 == 9){
-> 		cout << "EQUAL";
-12c10
-< cout << Object("NOT_EQUAL ");
----
-> 		cout << "NOT_EQUAL";
-------End of differences for Test  17 ------
-
-
-
-
-

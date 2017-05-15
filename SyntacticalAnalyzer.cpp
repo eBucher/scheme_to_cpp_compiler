@@ -715,6 +715,7 @@ int SyntacticalAnalyzer::action(){
 			cg->addToStack("==");
 			token = NextToken();
 			errors += runNonterminal("stmt_list");
+			cg->writeCode(")");
 			break;
 		case 37:
 			token = NextToken();
