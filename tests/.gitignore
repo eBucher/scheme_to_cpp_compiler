@@ -4,4 +4,8 @@
 *.p2
 *.p3
 *P3.cpp
+TeamL*P3.cpp
+TeamL*P3.cpp~
+.TeamL*P3.cpp.swp
+tempBashGarbage.txt
 testResults.txt

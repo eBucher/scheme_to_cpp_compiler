@@ -20,20 +20,17 @@ Lines preceded by > are from  expected16.cpp
 Lines preceded by < are from  TeamL17P3.cpp
 Lines preceded by > are from  expected17.cpp
 
-0a1,13
-> #include <iostream>
-> #include "Object.h"
-> using namespace std;
-> 
-> int main(){
-> 	Object _RetVal;
+8,10c7,8
+< if((Object(8)==Object(9)){
+< cout << Object("EQUAL ");
+< 
+---
 > 	if (8 == 9){
 > 		cout << "EQUAL";
-> 	} else {
+12c10
+< cout << Object("NOT_EQUAL ");
+---
 > 		cout << "NOT_EQUAL";
-> 	}
-> 	return 0;
-> }
 ------End of differences for Test  17 ------
 
 
