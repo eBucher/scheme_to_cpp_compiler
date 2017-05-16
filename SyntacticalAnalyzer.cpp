@@ -607,7 +607,6 @@ int SyntacticalAnalyzer::action(){
 			break;
 		case 20:
 			cg->writeCode("listop(\"" + lex->GetLexeme() + "\", ");
-			cg->addToStack(" ");
 			token = NextToken();
 			cg->addToStack(" ");
 			errors += runNonterminal("stmt");
