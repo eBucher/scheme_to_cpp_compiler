@@ -600,13 +600,14 @@ int SyntacticalAnalyzer::action(){
 			cg->writeCode("if(");
 			errors += runNonterminal("stmt");
 			cg->writeCode("){\n");
+			cg->setRetVal(true);
 			errors += runNonterminal("stmt");
 			cg->writeCode("\n} ");
 			errors += runNonterminal("else_part");
-			cg->setRetVal(true);
 			break;
 		case 20:
 			cg->writeCode("listop(\"" + lex->GetLexeme() + "\", ");
+			cg->addToStack(" ");
 			token = NextToken();
 			cg->addToStack(" ");
 			errors += runNonterminal("stmt");
