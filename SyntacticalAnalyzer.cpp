@@ -804,9 +804,14 @@ int SyntacticalAnalyzer::any_other_token(){
 		errors += runNonterminal("more_tokens");
 		cg->writeCode(")");
 		token = NextToken();	//Get one additional lexeme
-	} else if (rule >= 45 && rule <= 72) {
-		cg->writeCode(lex->GetLexeme() + " ");
+	} else if (rule >= 45 && rule < 72) {
+		cg->writeCode( lex->GetLexeme() + " ");
 		token = NextToken();	//Get one additional lexeme
+	} else if (rule == 72){
+		cg->writeCode( "\'" );
+		token = NextToken();
+		errors += runNonterminal("any_other_token");
+
 	}
 	ending(nonTerminal, token, errors);
 	return errors;
@@ -842,7 +847,7 @@ void SyntacticalAnalyzer::print(string nonTerm, token_type token, int rule){
  * Description:	Prints out the following information to the following files:
  * 		.p2 file: 	The nonterminal that is ending, the next proceding token from
  * 			  	the input file, and the number of errors that were encountered
- * 			  	in that nonterminal.
+  			  	in that nonterminal.
  * 		.dbg file: 	The nonterminal that is ending.
  *
  * Pre:		A nonterminal has finished being read in and the token being stored in token

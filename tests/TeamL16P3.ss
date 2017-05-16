@@ -8,3 +8,4 @@
 	(display ''not)
 	(display '('one 'two 'three))
 )
+(main)

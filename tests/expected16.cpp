@@ -3,6 +3,8 @@
 using namespace std;
 
 int main(){
-	cout << Object("quote not");
-	cout << Object("(one two three)");
+	Object _RetVal;
+	cout << Object("'not");
+	cout << Object("('one 'two 'three)");
+	return 0;
 }
