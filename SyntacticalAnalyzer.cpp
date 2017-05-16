@@ -608,16 +608,20 @@ int SyntacticalAnalyzer::action(){
 		case 20:
 			cg->writeCode("listop(\"" + lex->GetLexeme() + "\", ");
 			token = NextToken();
+			cg->addToStack(" ");
 			errors += runNonterminal("stmt");
 			cg->writeCode(")");
+			cg->popFromStack();
 			break;
 		case 21:
 			token = NextToken();
 			cg->writeCode("cons(");
+			cg->addToStack(" ");
 			errors += runNonterminal("stmt");
 			cg->writeCode(", ");
 			errors += runNonterminal("stmt");
 			cg->writeCode(")");
+			cg->popFromStack();
 			break;
 		case 22:
 		        cg->writeCode("(");
@@ -636,48 +640,64 @@ int SyntacticalAnalyzer::action(){
 		case 24:
 			cg->writeCode("! ");
 			token = NextToken();
+			cg->addToStack(" ");
 			errors += runNonterminal("stmt");
+			cg->popFromStack();
 			break;
 		case 25:
 			token = NextToken();
 			cg->writeCode("numberp(");
+			cg->addToStack(" ");
 			errors += runNonterminal("stmt");
+			cg->popFromStack();
 			cg->writeCode(" )");
 			break;
 		case 26:
 			token = NextToken();
 			cg->writeCode("symbolp(");
+			cg->addToStack(" ");
 			errors += runNonterminal("stmt");
+			cg->popFromStack();
 			cg->writeCode(" )");
 			break;
 		case 27:
 			token = NextToken();
 			cg->writeCode("listp(");
+			cg->addToStack(" ");
 			errors += runNonterminal("stmt");
+			cg->popFromStack();
 			cg->writeCode(" )");
 			break;
 		case 28:
 			token = NextToken();
 			cg->writeCode("zerop(");
+			cg->addToStack(" ");
 			errors += runNonterminal("stmt");
+			cg->popFromStack();
 			cg->writeCode(" )");
 			break;
 		case 29:
 			token = NextToken();
 			cg->writeCode("nullp(");
+			cg->addToStack(" ");
 			errors += runNonterminal("stmt");
+			cg->popFromStack();
 			cg->writeCode(" )");
 			break;
 		case 30:
 			token = NextToken();
 			cg->writeCode("charp(");
+			cg->addToStack(" ");
 			errors += runNonterminal("stmt");
+			cg->popFromStack();
 			cg->writeCode(" )");
 			break;
 		case 31:
 			token = NextToken();
 			cg->writeCode("stringp(");
+			cg->addToStack(" ");
 			errors += runNonterminal("stmt");
+			cg->popFromStack();
 			cg->writeCode(" )");
 			break;
 		case 32:
