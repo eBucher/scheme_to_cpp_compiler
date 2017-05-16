@@ -718,20 +718,32 @@ int SyntacticalAnalyzer::action(){
 			cg->writeCode(")");
 			break;
 		case 37:
+			cg->writeCode("(");
+			cg->addToStack(">");
 			token = NextToken();
 			errors += runNonterminal("stmt_list");
+			cg->writeCode(")");
 			break;
 		case 38:
+			cg->writeCode("(");
+			cg->addToStack("<");
 			token = NextToken();
 			errors += runNonterminal("stmt_list");
+			cg->writeCode(")");
 			break;
 		case 39:
+			cg->writeCode("(");
+			cg->addToStack(">=");
 			token = NextToken();
 			errors += runNonterminal("stmt_list");
+			cg->writeCode(")");
 			break;
 		case 40:
+			cg->writeCode("(");
+			cg->addToStack("<=");
 			token = NextToken();
 			errors += runNonterminal("stmt_list");
+			cg->writeCode(")");
 			break;
 		case 41:
 			cg->writeCode(lex->GetLexeme() + "(");
