@@ -1,5 +1,8 @@
-; Tests AND with more than 2 arguments
+; Tests OR
 
 (define (main)
-  (display (and '1 '2 '3 '4 'hello 'goodbye '()))
-  )
+	(if (or (list? '2) (zero? 7))
+ 		(display 'one_part_is_true)
+		(display 'its_all_false)
+	)
+)

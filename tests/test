@@ -30,7 +30,7 @@ cp ../P3.out .
 END=$((${numFiles}-1))
 for i in $(seq 0 $END)
 do
-	./P3.out ${sourceFiles[i]} >> tempBashGarbage.txt
+	./P3.out ${sourceFiles[i]} #>> tempBashGarbage.txt
 done
 
 #Delete any of the extra stuff that the syntactical analyzer makes
