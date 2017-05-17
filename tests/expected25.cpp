@@ -5,7 +5,12 @@ using namespace std;
 
 int main(  ) {
 	Object _RetVal;
-	_RetVal = (Object(9) < Object(1) < Object(0));
+	if ((Object(9) < Object(1) )){
+		cout << Object(1);
+	} else {
+		cout << Object(0);
+	}
+	cout << endl;
 	return 0;
 }
 

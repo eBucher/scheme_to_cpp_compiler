@@ -1,4 +1,8 @@
 ;Tests <
 (define (main)
-  (< 9 1 0)
+  (if (< 9 1)
+    (display 1)
+    (display 0)
+    )
+  (newline)
 )

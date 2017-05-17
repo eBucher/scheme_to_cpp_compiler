@@ -1,12 +1,9 @@
-; Tests OR with more than 2 arguments
-; COME BACK LATER AND FIX THIS ONE
-; COME BACK LATER AND FIX THIS ONE
-; COME BACK LATER AND FIX THIS ONE
-; COME BACK LATER AND FIX THIS ONE
-; COME BACK LATER AND FIX THIS ONE
-; COME BACK LATER AND FIX THIS ONE
-; COME BACK LATER AND FIX THIS ONE
+; Tests or with more than 2 arguments
 
 (define (main)
-  (display 'hi)
-  )
+	(if (or (null? '()) (list? '1) (list? '()))
+		(display 'something_is_true)
+		(display 'all_parts_are_false)
+	)
+	(newline)
+)

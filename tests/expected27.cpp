@@ -3,7 +3,9 @@
 using namespace std;
 
 int main(){
-  Object _RetVal;
+  	Object _RetVal;
   
-  cout << (Object(13) <= Object(13));
-  return 0;
+  	cout << (Object(13) <= Object(13));
+	cout << endl;
+ 	return 0;
+}
