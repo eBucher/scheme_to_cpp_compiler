@@ -825,8 +825,14 @@ int SyntacticalAnalyzer::any_other_token(){
 		errors += runNonterminal("more_tokens");
 		cg->writeCode(")");
 		token = NextToken();	//Get one additional lexeme
-	} else if (rule >= 45 && rule < 72) {
-		cg->writeCode( lex->GetLexeme() + " ");
+	} else if (rule == 45) {
+		cg->writeCode( lex->GetLexeme() + " " );
+		token = NextToken();	//Get one additional lexeme
+	} else if (rule == 46){
+		cg->writeCode( lex->GetLexeme());
+		token = NextToken();	//Get one additional lexeme
+	} else if (rule >= 47 && rule < 72){
+		cg->writeCode( lex->GetLexeme() + " " );
 		token = NextToken();	//Get one additional lexeme
 	} else if (rule == 72){
 		cg->writeCode( "(quote " );
