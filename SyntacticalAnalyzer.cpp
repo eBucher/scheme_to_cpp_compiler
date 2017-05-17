@@ -638,11 +638,12 @@ int SyntacticalAnalyzer::action(){
 			cg->writeCode(")");
 			break;
 		case 24:
-			cg->writeCode("! ");
+			cg->writeCode("!( ");
 			token = NextToken();
 			cg->addToStack(" ");
 			errors += runNonterminal("stmt");
 			cg->popFromStack();
+			cg->writeCode(" )");
 			break;
 		case 25:
 			token = NextToken();
@@ -828,10 +829,10 @@ int SyntacticalAnalyzer::any_other_token(){
 		cg->writeCode( lex->GetLexeme() + " ");
 		token = NextToken();	//Get one additional lexeme
 	} else if (rule == 72){
-		cg->writeCode( "\'" );
+		cg->writeCode( "(quote " );
 		token = NextToken();
 		errors += runNonterminal("any_other_token");
-
+		cg->writeCode(" )");
 	}
 	ending(nonTerminal, token, errors);
 	return errors;

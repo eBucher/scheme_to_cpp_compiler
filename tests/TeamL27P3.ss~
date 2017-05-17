@@ -1,5 +1,0 @@
-; Tests LTE
-
-(define (main)
-  (<= 13 13)
-  )

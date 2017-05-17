@@ -4,7 +4,7 @@ using namespace std;
 
 int main(){
 	Object _RetVal;
-	cout << Object("'not");
-	cout << Object("('one 'two 'three)");
+	cout << Object("(quote not)");
+	cout << Object("((quote one) (quote two) (quote three))");
 	return 0;
 }

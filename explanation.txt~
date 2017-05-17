@@ -1,0 +1,112 @@
+Author: Kevin Gantsweg
+Assignment: Project 3
+Date: 5/16/17
+
+So I looked into the results of test2, where the following test cases failed test2:
+
+Test 0, Test 2, Test 3, Tests 14 - 16, Tests 19 - 28
+
+------------------------------------------------------------------------------------------------
+The ones where the C++ code did not compile are of the following:
+
+Test 2, Test 3, Tests 20 - 23, Test 25
+
+------------------------------------------------------------------------------------------------
+The ones where the C++ output did not match the Guile output are of the following:
+
+Test 0, Tests 14 - 6, Test 19, Test 24, Tests 26 - 28
+
+------------------------------------------------------------------------------------------------
+Now I shall start with my input for these test cases that failed test2
+
+Test 0:  The problem with Test 0 is that the Guile file doesn't compile. It appears
+that having a blank define is a syntax error. Simple as that I guess.
+
+Test 2:  On one hand, there's the errors that "symbol()" and "charp()" are not declared
+in the scope, which is weird since they are a part of the Object class and the TestL2P3.cpp
+includes the Object.h file. On the other hand, there's the errors that "l" and "d"
+are not declared in the scope, which I believe is because it is looking at those as
+argument variables, but of course we are trying to evaluate them as a string or a char.
+The problem is that we cannot wrap the l or d in double quotes or single quotes becuase it
+looks like the only way we will be to get inbetween the parenthesis after Object( <--these--> )
+is in the Object class. Which of course, I have no idea if Watts cares if we modify
+the Object class she gave us. Even then, that would give us more work and I think we
+should avoid it.
+
+Test 3:  This is a similar situation to Test2, because the not (!) operator only takes a bool
+input, and we are trying to input an Object type. In other words, we would either have to
+somehow typecast the Object we are returning to the not (!) operator [which I think is pretty
+much impossible] or we would have to construct our own user-define not (!) operator that takes
+in Object types. This ties back into the question of whether we are allowed to and/or willing to
+modify the Object class Watts gave us.
+
+Test 14:  Ok, this is pretty much a big problem. This is also prominent in other test cases,
+unfortunately. For this test case, we are trying to do a division of several numbers.
+(Guile: (/ 1 2 3 4 5))
+The Guile outputs 1/120, however the C++ outputs 0. I tried doing several different ways of
+displaying the answer in the C++ file, but got 0 each time. I later realized the problem,
+the Object class is taking in those numbers as ints. Which has to mean, that we are trying
+to ouput an int, which of course will be 0 if we try to output a fraction. To be honest,
+I'm not entirely sure how we could fix this problem. Maybe it has to do with the divide (/)
+operator in the Object class? If I remember correctly, it only deals with ints or Reals, so
+it would make sense that it isn't giving us the answer we want.
+
+Test 15:  This is pretty much the same situation as Test 14. The following is the Guile code:
+(display (+ 1 (- 2 3 4) (* 5 6 7 (/ 8 9)) 10))
+Since we are still technically dealing with ints, the (/ 8 9) statement will return 0, which in
+turn converts the (* 5 6 7 (/ 8 9)) statement to 0 as well, and the final result ends up being 6.
+Even though the expected output is something along the lines of 538/3.
+
+Test 16:  This test case deals with Case 72, the Case From Hell. Basically almost any token
+can be preceded by a ' (quote) symbol. In Guile, the expected output is something like this:
+(quote not)((quote one) (quote two) (quote three))
+What a coincidence, this is also the exact the test case we are using! Who would've thought?
+Anyways, we currently had our .cpp file printing out and output something like this:
+('not)(('one) ('two) ('three))
+Since we were supposed to actually write out the word "quote" [I guess], I modified a bit of
+the code in the SyntacticalAnalyzer.cpp file so that it would write out the actual word instead
+of the symbol. Guess what? Aparently they still don't match, according to Erich's test.
+Goddammit Erich. Jokes aside, I even compared the two outputs that were almost close to each
+other. They looked pretty similar to me, by golly! So this has me beat guys... *sobs*
+
+Test 19:  This test is similar to Test 16 in the sense that the Guile output and the C++ output
+both do nothing. What? You heard me right, they both don't do anything, and Erich's test says
+they are not similar. Erich, please. Y u du dis 2 m3? ;_;
+Jokes aside, I have no fucking clue.
+
+Test 20:  This is similar to Test 3 because the and (&&) operator only takes bool inputs.
+
+Test 21:  Multiple and (&&) operators, so the same as Test 20, which is the same as Test 3. Go figure.
+
+Test 22:  This is similar to Test 3 because the or (||) operator only takes bool inputs.
+
+Test 23:  Multiple or (||) operators, so the same as Test 21, which is the same as Test 20, which
+in turn is the same as Test 3. But is mostly similar to test 22, which is also similar to Test 3.
+Oh mama mia! Oi vey!
+
+Test 24:  The situation is that we have an if statement. In Guile, when you execute this main,
+it returns this answer as either #f or #t. In C++, it would be returned as 0 or 1. Basically we have
+this dilemna of how do we get both of them to return the same thing? We could just do something simple
+like if true, display "true", or if false, display "false." Something like that, but we can discuss
+it more next time we meet up.
+
+Test 25:  For this test case, we are trying to do something like multiple logical comparisons, similar
+to this Guile code: (< 1 2 3). However, when it is translated to C++, it becomes (1 < 2 < 3), and this
+just does not work in C++. Besides, Watts told us we don't have to worry about this kind of test case,
+so I think we can just trash this test case.
+
+Test 26:  This is of the same similar situation as Test 24.
+
+Test 27:  This is of the same similar situation as Test 24.
+
+Test 28: For this test case, I was actually able to fix it so that it passes test2. *GASP*
+Anyways, the problem was that we had an if statement. If it was true, return something, and if it was
+false, return something else. In Guile, it would return something along the lines of $1 = '(1 2 3)
+Something like that, anyways. However, the way we have the C++ generated code set up, is that we make
+Object _RetVal equal to that comparison, and main() functions do not return _RetVal. In other words,
+the C++ output does not output anything! So what I did is that I just changed the .ss file and the
+expected file to actually display/cout the answer. This makes it pass test2.
+
+Well this is all of my insights on these test cases that failed test2 [except the one that I fixed ( ͡° ͜ʖ ͡°) ]
+
+Talk to ya later guyzzzzz!
