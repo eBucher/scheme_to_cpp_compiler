@@ -4,6 +4,10 @@ using namespace std;
 
 int main(){
   Object _RetVal;
-  cout << (Object("1 ") || Object("2 "));
+  if((nullp(Object("()")) && stringp(Object("1")) && listp(Object("()")))){
+    cout << Object("all_parts_are_true");
+  } else{
+    cout << Object("something_is_false");
+  }
   return 0;
 }

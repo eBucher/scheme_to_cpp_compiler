@@ -1,5 +1,12 @@
 ; Tests OR with more than 2 arguments
+; COME BACK LATER AND FIX THIS ONE
+; COME BACK LATER AND FIX THIS ONE
+; COME BACK LATER AND FIX THIS ONE
+; COME BACK LATER AND FIX THIS ONE
+; COME BACK LATER AND FIX THIS ONE
+; COME BACK LATER AND FIX THIS ONE
+; COME BACK LATER AND FIX THIS ONE
 
 (define (main)
-  (display (or '1 '2 '3 '4 'hello 'goodbye '()))
+  (display 'hi)
   )

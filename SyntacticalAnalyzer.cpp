@@ -437,6 +437,7 @@ int SyntacticalAnalyzer::quoted_lit() {
 		rule = GetRule(6, token);
 	}
 	if (rule == 12) {
+		
 		cg->writeCode("Object(\"");
 		errors += runNonterminal("any_other_token");
 		cg->writeCode("\")");

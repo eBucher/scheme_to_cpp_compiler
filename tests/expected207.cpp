@@ -4,6 +4,10 @@ using namespace std;
 
 int main(){
 	Object _RetVal;
-	cout << Object("((quote one) (quote two) (quote three))");
+	if(stringp(Object(100))){
+		cout << Object("yes_it_is");
+	} else{
+		cout << Object("no_it_is_not");
+	}
 	return 0;
 }

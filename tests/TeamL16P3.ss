@@ -5,7 +5,5 @@
 ; like.
 
 (define (main)
-	(display ''not)
 	(display '('one 'two 'three))
 )
-(main)
