@@ -1,7 +1,7 @@
 /********************************************************************************/
 /* Project: 2, Syntactical Analyzer 	      					*/
-/* Author: Jeff Bahns, Erich Bucher, Jordan Bergero		    		*/
-/* Date: 4/16/2017							    	*/
+/* Author: Matt Sweeney, Kevin Gantsweg, Erich Bucher		    		*/
+/* Date: 5/18/2017							    	*/
 /* Description:	A syntactical analyzer built on top of Project 1. When a new    */
 /* 		SyntacticalAnalyzer object is created, it will open up the      */
 /*		file given as the constructors argument, parse through it, and  */
@@ -14,6 +14,7 @@
 /*			   beginning.						*/
 /*		.lst file: All of the lines from the input file, followed by	*/
 /*			   all of the lexical and syntactical errors.		*/
+/*		.cpp file: The scheme code that has been translated to C++.     */
 /********************************************************************************/
 
 #include <iostream>
