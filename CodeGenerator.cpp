@@ -60,6 +60,15 @@ void CodeGenerator::writeObject(string objectName) {
 	p3file << "Object(" << objectName << ")";
 }
 
+/**************************************************\
+ * Function: writeOperator
+ * Description: Writes out the element that is currently on top of the operator
+ * 		stack with a space after it to the p3file if the first statement
+ * 		has already been written. If the first statement has not already
+ * 		been written, then nothing will be written and first_stmt will
+ * 		be set to false.
+ * 		The top element on the stack will not be popped off.
+ *************************************************/
 void CodeGenerator::writeOperator(){
 	if ( first_stmt == false ){
 		if(!operator_stack.empty()){
@@ -71,22 +80,42 @@ void CodeGenerator::writeOperator(){
 	}
 }
 
+/**************************************************\
+ * Function: addToStack
+ * Description: Pushes c onto the operator stack and changes
+ * 		first_stmt to true.
+ *************************************************/
 void CodeGenerator::addToStack(string c){
 	first_stmt = true;
 	operator_stack.push(c);
 }
 
 
+/*************************************************\
+ * Function: popFromStack
+ * Description: Pops the top element off of operator_stack.
+ * Pre:	operator_stack has atleast one element on it.
+ *************************************************/
 void CodeGenerator::popFromStack(){
 	operator_stack.pop();
 }
 
 
+/*************************************************\
+ * Function: getRetVal
+ * Description: This is an accessor function for getting the private
+ * 		data member use_retVal.
+ *************************************************/
 bool CodeGenerator::getRetVal(){
 	return use_retVal;
 }
 
 
+/*************************************************\
+ * Function: setRetVal
+ * Description: This is a setter function for setting the private data
+ * 		member use_retVal.
+ *************************************************/
 void CodeGenerator::setRetVal(bool val){
 	use_retVal = val;
 }
