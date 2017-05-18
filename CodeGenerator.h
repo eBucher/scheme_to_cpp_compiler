@@ -1,3 +1,11 @@
+/**************************************************\
+ * File: CodeGenerator.h
+ * Authors: Erich Bucher, Kevin Brooks Gantsweg, Matthew Brian John-Vianney Sweeney
+ * Description: The CodeGenerator class is part of the translation process for
+ * 		converting Guile code to C++. Its main purpose is to write strings
+ * 		that are given to it into a specified file. It also manages
+ * 		operators and when to write them between different statements.
+ *************************************************/
 #include <iostream>
 #include <fstream>
 #include <stack>
