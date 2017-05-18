@@ -830,7 +830,7 @@ int SyntacticalAnalyzer::any_other_token(){
 		cg->writeCode( lex->GetLexeme() + " " );
 		token = NextToken();	//Get one additional lexeme
 	} else if (rule == 46){
-		cg->writeCode( lex->GetLexeme());
+		cg->writeCode( lex->GetLexeme() + " ");
 		token = NextToken();	//Get one additional lexeme
 	} else if (rule >= 47 && rule < 72){
 		cg->writeCode( lex->GetLexeme() + " " );
