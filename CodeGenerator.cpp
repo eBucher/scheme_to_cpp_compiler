@@ -6,6 +6,12 @@
 
 using namespace std;
 
+
+ /**************************************************************\
+ * Function: CodeGenerator Constructor                          *
+ * Description: Initilizes the CodeGenerator class. Creates the *
+ * 			 output file, and calls startFile().             *
+ \**************************************************************/
 CodeGenerator::CodeGenerator( char* filename ){
 	main_func = false;
 	int fnlength = strlen(filename);
@@ -18,15 +24,29 @@ CodeGenerator::CodeGenerator( char* filename ){
 	use_retVal = true;
 }
 
+ /**************************************\
+ * Function: CodeGenerator Destructor   *
+ * Description: Closes the output file. *
+ \**************************************/
 CodeGenerator::~CodeGenerator(){
 	cout << "Closing File." << endl;
 	p3file.close();
 }
 
+ /*********************************************************************\
+ * Function: startFile 										 *
+ * Description: Writes the includes, and namespace to the output file. *
+ \*********************************************************************/
 void CodeGenerator::startFile() {
 	p3file << "#include <iostream>\n#include \"Object.h\"\n\nusing namespace std;\n\n";
 }
 
+ /**********************************************************************\
+ * Function: startFunction 									  *
+ * Description: Outputs the beginning of a function to the output file. *
+ * 			 If function_name is "main" it sets the function to an   *
+ * 			 int, otherwise it is an Object.                         *
+ \**********************************************************************/
 void CodeGenerator::startFunction( string function_name ){
 	if ( function_name == "main" ){
 		p3file << "int main( ";
@@ -37,6 +57,12 @@ void CodeGenerator::startFunction( string function_name ){
 	}
 }
 
+ /****************************************************************\
+ * Function: endFunction 							      *
+ * Description: Outputs the return object and closing brackets.   *
+ * 			 If main_func = true, the function returns 0, else *
+ * 			 the function returns _RetVal. 				 *
+ \****************************************************************/
 void CodeGenerator::endFunction(){
 	if ( main_func )
 		p3file << "\treturn 0;\n}";
