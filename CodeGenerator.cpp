@@ -43,19 +43,45 @@ void CodeGenerator::endFunction(){
 	else p3file << "\treturn _RetVal;\n}\n";
 }
 
+/********************************************************\
+ * Function: addParam
+ * Description: Adds all of the required parameter(s)
+ * to the param_list variable for the associated
+ * function.
+\********************************************************/
 void CodeGenerator::addParam( string param ){
 	param_list += "Object " + param + ", "; 
 }
 
+/********************************************************\
+ * Function: outputParams
+ * Description: Takes the param_list variable and outputs
+ * all of the parameters into the p3file which handles the
+ * generation of the Guile code translated to C++ code.
+\********************************************************/
 void CodeGenerator::outputParams(  ){
 	p3file << param_list.substr(0, param_list.size()-2);
 	param_list = "";
 }
 
+/********************************************************\
+ * Function: writeCode
+ * Description: A simple function that will simply write
+ * out simple symbols of code that are vital to the
+ * generation of the Guile code translated to C++ code.
+ * i.e (double quotes, parenthesis, brackets etc...)
+\********************************************************/
 void CodeGenerator::writeCode( string code ) {
 	p3file << code;
 }
 
+/*******************************************************\
+ * Function: writeObject
+ * Description: Another simple function that will simply
+ * write out data-typed variables casted as an Object,
+ * basically whenever a function calls another function
+ * within itself.
+\*******************************************************/
 void CodeGenerator::writeObject(string objectName) {
 	p3file << "Object(" << objectName << ")";
 }
