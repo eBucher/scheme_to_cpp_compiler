@@ -14,6 +14,12 @@
 
 using namespace std;
 
+
+ /**************************************************************\
+ * Function: CodeGenerator Constructor                          *
+ * Description: Initilizes the CodeGenerator class. Creates the *
+ * 			 output file, and calls startFile().             *
+ \**************************************************************/
 CodeGenerator::CodeGenerator( char* filename ){
 	main_func = false;
 	int fnlength = strlen(filename);
@@ -26,15 +32,29 @@ CodeGenerator::CodeGenerator( char* filename ){
 	use_retVal = true;
 }
 
+ /**************************************\
+ * Function: CodeGenerator Destructor   *
+ * Description: Closes the output file. *
+ \**************************************/
 CodeGenerator::~CodeGenerator(){
 	cout << "Closing File." << endl;
 	p3file.close();
 }
 
+ /*********************************************************************\
+ * Function: startFile 										 *
+ * Description: Writes the includes, and namespace to the output file. *
+ \*********************************************************************/
 void CodeGenerator::startFile() {
 	p3file << "#include <iostream>\n#include \"Object.h\"\n\nusing namespace std;\n\n";
 }
 
+ /**********************************************************************\
+ * Function: startFunction 									  *
+ * Description: Outputs the beginning of a function to the output file. *
+ * 			 If function_name is "main" it sets the function to an   *
+ * 			 int, otherwise it is an Object.                         *
+ \**********************************************************************/
 void CodeGenerator::startFunction( string function_name ){
 	if ( function_name == "main" ){
 		p3file << "int main( ";
@@ -45,25 +65,57 @@ void CodeGenerator::startFunction( string function_name ){
 	}
 }
 
+ /****************************************************************\
+ * Function: endFunction 							      *
+ * Description: Outputs the return object and closing brackets.   *
+ * 			 If main_func = true, the function returns 0, else *
+ * 			 the function returns _RetVal. 				 *
+ \****************************************************************/
 void CodeGenerator::endFunction(){
 	if ( main_func )
 		p3file << "\treturn 0;\n}";
 	else p3file << "\treturn _RetVal;\n}\n";
 }
 
+/********************************************************\
+ * Function: addParam
+ * Description: Adds all of the required parameter(s)
+ * to the param_list variable for the associated
+ * function.
+\********************************************************/
 void CodeGenerator::addParam( string param ){
 	param_list += "Object " + param + ", "; 
 }
 
+/********************************************************\
+ * Function: outputParams
+ * Description: Takes the param_list variable and outputs
+ * all of the parameters into the p3file which handles the
+ * generation of the Guile code translated to C++ code.
+\********************************************************/
 void CodeGenerator::outputParams(  ){
 	p3file << param_list.substr(0, param_list.size()-2);
 	param_list = "";
 }
 
+/********************************************************\
+ * Function: writeCode
+ * Description: A simple function that will simply write
+ * out simple symbols of code that are vital to the
+ * generation of the Guile code translated to C++ code.
+ * i.e (double quotes, parenthesis, brackets etc...)
+\********************************************************/
 void CodeGenerator::writeCode( string code ) {
 	p3file << code;
 }
 
+/*******************************************************\
+ * Function: writeObject
+ * Description: Another simple function that will simply
+ * write out data-typed variables casted as an Object,
+ * basically whenever a function calls another function
+ * within itself.
+\*******************************************************/
 void CodeGenerator::writeObject(string objectName) {
 	p3file << "Object(" << objectName << ")";
 }
