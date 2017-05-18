@@ -16,9 +16,9 @@ using namespace std;
 
 
  /**************************************************************\
- * Function: CodeGenerator Constructor                          *
- * Description: Initilizes the CodeGenerator class. Creates the *
- * 			 output file, and calls startFile().             *
+ * Function: CodeGenerator Constructor                          
+ * Description: Initilizes the CodeGenerator class. Creates the 
+ * 			 output file, and calls startFile().      
  \**************************************************************/
 CodeGenerator::CodeGenerator( char* filename ){
 	main_func = false;
@@ -42,18 +42,18 @@ CodeGenerator::~CodeGenerator(){
 }
 
  /*********************************************************************\
- * Function: startFile 										 *
- * Description: Writes the includes, and namespace to the output file. *
+ * Function: startFile 										 
+ * Description: Writes the includes, and namespace to the output file. 
  \*********************************************************************/
 void CodeGenerator::startFile() {
 	p3file << "#include <iostream>\n#include \"Object.h\"\n\nusing namespace std;\n\n";
 }
 
  /**********************************************************************\
- * Function: startFunction 									  *
- * Description: Outputs the beginning of a function to the output file. *
- * 			 If function_name is "main" it sets the function to an   *
- * 			 int, otherwise it is an Object.                         *
+ * Function: startFunction 						
+ * Description: Outputs the beginning of a function to the output file. 
+ * 			 If function_name is "main" it sets the function to an   
+ * 			 int, otherwise it is an Object.                         
  \**********************************************************************/
 void CodeGenerator::startFunction( string function_name ){
 	if ( function_name == "main" ){
@@ -66,10 +66,10 @@ void CodeGenerator::startFunction( string function_name ){
 }
 
  /****************************************************************\
- * Function: endFunction 							      *
- * Description: Outputs the return object and closing brackets.   *
- * 			 If main_func = true, the function returns 0, else *
- * 			 the function returns _RetVal. 				 *
+ * Function: endFunction 			
+ * Description: Outputs the return object and closing brackets.   
+ * 			 If main_func = true, the function returns 0, else 
+ * 			 the function returns _RetVal. 		
  \****************************************************************/
 void CodeGenerator::endFunction(){
 	if ( main_func )
