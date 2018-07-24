@@ -34,6 +34,7 @@ New tests can be added to the tests folder by simply creating two files. The fir
 In order to print a message describing the test, add a comment to the top of the .ss file. Comments in scheme are written with a semicolon at the beginning of them like this:
 
 > ; Here is a comment that will appear in the output to remind the
+
 > ; user what is being tested.
 
 Once these two files are added, they will automatically be used when the test command is run again.
